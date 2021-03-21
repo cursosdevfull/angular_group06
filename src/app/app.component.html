@@ -1,11 +1,8 @@
-<!-- <amb-item [username]="username" *ngFor="let username of listUsers"></amb-item>
-
-<div *ngFor="let user of listUsers">
-  {{ user }}
-</div>
- -->
-
-<!-- <amb-page-login></amb-page-login>
-<amb-page-medic></amb-page-medic> -->
-
-<router-outlet></router-outlet>
+<mat-sidenav-container>
+  <mat-sidenav opened="true" mode="side">
+    <amb-menu></amb-menu>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
