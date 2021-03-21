@@ -1,5 +1,14 @@
 <mat-nav-list>
-  <mat-list-item>
+  <mat-list-item *ngFor="let menu of listMenu" routerLinkActive="activeLink">
+    <a [routerLink]="menu.url">
+      <button mat-icon-button color="primary">
+        <mat-icon [svgIcon]="menu.icon"></mat-icon>
+      </button>
+      {{ menu.title }}
+    </a>
+    <!-- <a routerLink="{{ menu.url }}">{{ menu.title }}</a> -->
+  </mat-list-item>
+  <!--   <mat-list-item>
     <a routerLink="/dashboard">Dashboard</a>
   </mat-list-item>
   <mat-list-item>
@@ -13,8 +22,5 @@
   </mat-list-item>
   <mat-list-item>
     <a routerLink="/users">Usuario</a>
-  </mat-list-item>
-  <mat-list-item>
-    <a routerLink="/dashboard">Dashboard</a>
-  </mat-list-item>
+  </mat-list-item> -->
 </mat-nav-list>

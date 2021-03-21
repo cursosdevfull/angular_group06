@@ -11,6 +11,10 @@ mat-list-item:hover {
   background-color: #039be5 !important;
 }
 
+.activeLink {
+  background-color: #039be5;
+}
+
 a,
 a:link,
 a:visited,
