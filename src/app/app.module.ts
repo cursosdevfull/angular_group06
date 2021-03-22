@@ -10,6 +10,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { LogService } from './shared/services/log.service';
 import { IconService } from './shared/services/icon.service';
 import { HttpClientModule } from '@angular/common/http';
+import { MatIconModule } from '@angular/material/icon';
+import { FlexLayoutModule } from '@angular/flex-layout';
 @NgModule({
   declarations: [AppComponent, ItemComponent],
   imports: [
@@ -19,6 +21,8 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     MatSidenavModule,
     HttpClientModule,
+    MatIconModule,
+    FlexLayoutModule,
   ],
   providers: [
     LogService,
