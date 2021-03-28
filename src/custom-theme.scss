@@ -35,7 +35,7 @@ $mat-green: (
   ),
 );
 
-$ambulance-primary: mat-palette($mat-green);
+$ambulance-primary: mat-palette($mat-indigo);
 $ambulance-accent: mat-palette($mat-pink, A200, A100, A400);
 $ambulance-warn: mat-palette($mat-red);
 

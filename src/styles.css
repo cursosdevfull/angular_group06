@@ -9,6 +9,10 @@ body {
   font-family: "muliregular", Roboto, "Helvetica Neue", sans-serif;
 }
 
+.align-right {
+  text-align: right;
+}
+
 @font-face {
   font-family: "muliregular";
   src: url("/assets/fonts/muli/muli-webfont.woff2") format("woff2"),
