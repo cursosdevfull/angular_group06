@@ -17,10 +17,18 @@ export class MenuService {
   constructor(private logService: LogService) {}
 
   getListMenu(): IMenu[] {
-    // const list: IMenu[] = Object.assign([], this.listMenu)
-    /*     const list: IMenu[] = [...this.listMenu];
-    return list; */
     this.logService.writeToLog('get list menu');
     return [...this.listMenu];
+  }
+
+  getDataPath(path: string): Partial<IMenu> {
+    const elementMatched = this.listMenu.find(
+      (el) => path.toLowerCase().indexOf(el.url.toLowerCase()) > -1
+    );
+
+    return {
+      title: elementMatched?.title,
+      icon: elementMatched?.icon,
+    };
   }
 }
