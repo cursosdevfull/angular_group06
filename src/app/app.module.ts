@@ -12,6 +12,8 @@ import { IconService } from './shared/services/icon.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatPaginatorIntl } from '@angular/material/paginator';
+import { Paginator } from './shared/classes/paginator';
 @NgModule({
   declarations: [AppComponent, ItemComponent],
   imports: [
@@ -26,6 +28,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
   ],
   providers: [
     LogService,
+    { provide: MatPaginatorIntl, useClass: Paginator },
     //{provide: MenuService, useClass: MenuService}
   ],
   bootstrap: [AppComponent],

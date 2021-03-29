@@ -12,6 +12,7 @@ import {
   MatTable,
   MatTableDataSource,
 } from '@angular/material/table';
+import { environment } from 'src/environments/environment';
 import { MetaDataColumn } from '../../services/meta-data-column';
 
 @Component({
@@ -23,6 +24,7 @@ import { MetaDataColumn } from '../../services/meta-data-column';
 export class TableComponent implements OnInit {
   @Input() data: any = [];
   @Input() metaDataColumns: MetaDataColumn[] = [];
+  @Input() totalRecords: string = '';
   @ViewChild(MatTable, { static: true }) table: MatTable<any> | undefined;
   @ContentChildren(MatColumnDef, { descendants: true }) columnsDef:
     | QueryList<MatColumnDef>
@@ -30,11 +32,13 @@ export class TableComponent implements OnInit {
 
   listFields: string[] = [];
   dataSource: any;
+  pageSize: number = 0;
 
   constructor() {}
 
   ngOnInit(): void {
     this.listFields = this.metaDataColumns.map((el) => el.field);
+    this.pageSize = environment.pageSize;
     this.loadData();
   }
 
@@ -52,5 +56,9 @@ export class TableComponent implements OnInit {
     if (this.columnsDef.length) {
       this.listFields.push('actions');
     }
+  }
+
+  handlerPage(evt: any) {
+    console.log(evt.pageIndex);
   }
 }

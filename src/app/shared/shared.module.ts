@@ -10,6 +10,7 @@ import { TableComponent } from './components/table/table.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatPaginatorModule } from '@angular/material/paginator';
 @NgModule({
   declarations: [TitleComponent, ContainerComponent, TableComponent],
   imports: [
@@ -19,6 +20,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     FlexLayoutModule,
     MatCardModule,
     MatTableModule,
+    MatPaginatorModule,
   ],
   exports: [
     TitleComponent,
