@@ -17,12 +17,20 @@ import {
   PERFECT_SCROLLBAR_CONFIG,
 } from 'ngx-perfect-scrollbar';
 import { PaginatorComponent } from './components/paginator/paginator.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ConfirmComponent } from './components/confirm/confirm.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
 };
 @NgModule({
-  declarations: [TitleComponent, ContainerComponent, TableComponent, PaginatorComponent],
+  declarations: [
+    TitleComponent,
+    ContainerComponent,
+    TableComponent,
+    PaginatorComponent,
+    ConfirmComponent,
+  ],
   imports: [
     CommonModule,
     MatToolbarModule,
@@ -31,6 +39,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MatCardModule,
     MatTableModule,
     MatPaginatorModule,
+    MatButtonModule,
+    MatDialogModule,
   ],
   exports: [
     TitleComponent,
@@ -42,7 +52,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MatTooltipModule,
     PerfectScrollbarModule,
     MatPaginatorModule,
+    MatDialogModule,
     PaginatorComponent,
+    ConfirmComponent,
   ],
   providers: [
     {
