@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PaginatorData } from 'src/app/shared/classes/paginator-data';
 import { MetaDataColumn } from 'src/app/shared/services/meta-data-column';
 import { environment } from 'src/environments/environment';
 
@@ -7,7 +8,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './list-users.component.html',
   styleUrls: ['./list-users.component.css'],
 })
-export class ListUsersComponent implements OnInit {
+export class ListUsersComponent extends PaginatorData implements OnInit {
   metaDataColumns: MetaDataColumn[] = [
     { field: 'nombre', title: 'Nombre completo' },
     { field: 'correo', title: 'Correo' },
@@ -58,24 +59,10 @@ export class ListUsersComponent implements OnInit {
     { nombre: 'Nombre', correo: 'correo@correo.com', roles: 'ADMIN, OPERATOR' },
     { nombre: 'Nombre', correo: 'correo@correo.com', roles: 'ADMIN, OPERATOR' },
   ];
-  dataByPage: any = [];
 
   pageSize: number = environment.pageSizeUser;
 
-  constructor() {}
-
-  ngOnInit(): void {
-    this.loadData();
-  }
-
-  loadData(page: number = 0) {
-    this.dataByPage = this.data.slice(
-      page * this.pageSize,
-      page * this.pageSize + this.pageSize
-    );
-  }
-
-  userChangedPage(page: number) {
-    this.loadData(page);
+  constructor() {
+    super();
   }
 }

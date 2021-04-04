@@ -14,6 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { Paginator } from './shared/classes/paginator';
+import { SharedModule } from './shared/shared.module';
 @NgModule({
   declarations: [AppComponent, ItemComponent],
   imports: [
@@ -21,6 +22,7 @@ import { Paginator } from './shared/classes/paginator';
     CoreModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    SharedModule,
     MatSidenavModule,
     HttpClientModule,
     MatIconModule,

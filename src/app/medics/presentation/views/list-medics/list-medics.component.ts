@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PaginatorData } from 'src/app/shared/classes/paginator-data';
 import { MetaDataColumn } from 'src/app/shared/services/meta-data-column';
 import { environment } from 'src/environments/environment';
 
@@ -7,7 +8,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './list-medics.component.html',
   styleUrls: ['./list-medics.component.css'],
 })
-export class ListMedicsComponent implements OnInit {
+export class ListMedicsComponent extends PaginatorData implements OnInit {
   metaDataColumns: MetaDataColumn[] = [
     { field: 'cmp', title: 'Nro. Colegiatura' },
     { field: 'nombre', title: 'Nombre' },
@@ -103,24 +104,7 @@ export class ListMedicsComponent implements OnInit {
     },
   ];
 
-  dataByPage: any = [];
-
-  pageSize: number = environment.pageSize;
-
-  constructor() {}
-
-  ngOnInit(): void {
-    this.loadData();
-  }
-
-  loadData(page: number = 0) {
-    this.dataByPage = this.data.slice(
-      page * this.pageSize,
-      page * this.pageSize + this.pageSize
-    );
-  }
-
-  userChangedPage(page: number) {
-    this.loadData(page);
+  constructor() {
+    super();
   }
 }
