@@ -1,8 +1,8 @@
-.container-table {
+/* .container-table {
   height: 90%;
   overflow: auto;
   position: relative;
-}
+} */
 
 .highline:hover {
   background-color: rgba(0, 0, 0, 0.1);

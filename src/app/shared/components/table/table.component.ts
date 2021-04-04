@@ -42,7 +42,9 @@ export class TableComponent implements OnInit {
     this.loadData();
   }
 
-  ngOnChanges() {}
+  ngOnChanges() {
+    this.loadData();
+  }
 
   loadData() {
     this.dataSource = new MatTableDataSource<any>(this.data);

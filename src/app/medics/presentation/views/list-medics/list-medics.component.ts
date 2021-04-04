@@ -15,7 +15,49 @@ export class ListMedicsComponent implements OnInit {
     { field: 'localidad', title: 'Lugar de trabajo' },
   ];
 
-  data: any = [
+  data: any[] = [
+    {
+      cmp: 'CMP',
+      nombre: 'Nombre',
+      apellido: 'Apellido',
+      especialidad: 'Especialidad',
+      localidad: 'Localidad',
+    },
+    {
+      cmp: 'CMP',
+      nombre: 'Nombre',
+      apellido: 'Apellido',
+      especialidad: 'Especialidad',
+      localidad: 'Localidad',
+    },
+    {
+      cmp: 'CMP',
+      nombre: 'Nombre',
+      apellido: 'Apellido',
+      especialidad: 'Especialidad',
+      localidad: 'Localidad',
+    },
+    {
+      cmp: 'CMP',
+      nombre: 'Nombre',
+      apellido: 'Apellido',
+      especialidad: 'Especialidad',
+      localidad: 'Localidad',
+    },
+    {
+      cmp: 'CMP',
+      nombre: 'Nombre',
+      apellido: 'Apellido',
+      especialidad: 'Especialidad',
+      localidad: 'Localidad',
+    },
+    {
+      cmp: 'CMP',
+      nombre: 'Nombre',
+      apellido: 'Apellido',
+      especialidad: 'Especialidad',
+      localidad: 'Localidad',
+    },
     {
       cmp: 'CMP',
       nombre: 'Nombre',
@@ -60,7 +102,24 @@ export class ListMedicsComponent implements OnInit {
     },
   ];
 
+  dataByPage: any = [];
+
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.loadData();
+  }
+
+  loadData(page: number = 0) {
+    this.dataByPage = this.data.slice(page * 10, page * 10 + 10);
+  }
+
+  changePage(evt: {
+    length: number;
+    pageIndex: number;
+    pageSize: number;
+    previousPageIndex?: number;
+  }) {
+    this.loadData(evt.pageIndex);
+  }
 }
