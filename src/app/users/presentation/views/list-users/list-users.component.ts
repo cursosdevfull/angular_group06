@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MetaDataColumn } from 'src/app/shared/services/meta-data-column';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'amb-list-users',
@@ -12,14 +13,69 @@ export class ListUsersComponent implements OnInit {
     { field: 'correo', title: 'Correo' },
     { field: 'roles', title: 'Roles' },
   ];
-  data: any = [
+  data: any[] = [
+    { nombre: 'Nombre', correo: 'correo@correo.com', roles: 'ADMIN, OPERATOR' },
+    { nombre: 'Nombre', correo: 'correo@correo.com', roles: 'ADMIN, OPERATOR' },
+    { nombre: 'Nombre', correo: 'correo@correo.com', roles: 'ADMIN, OPERATOR' },
+    { nombre: 'Nombre', correo: 'correo@correo.com', roles: 'ADMIN, OPERATOR' },
+    { nombre: 'Nombre', correo: 'correo@correo.com', roles: 'ADMIN, OPERATOR' },
+    { nombre: 'Nombre', correo: 'correo@correo.com', roles: 'ADMIN, OPERATOR' },
+    { nombre: 'Nombre', correo: 'correo@correo.com', roles: 'ADMIN, OPERATOR' },
+    { nombre: 'Nombre', correo: 'correo@correo.com', roles: 'ADMIN, OPERATOR' },
+    { nombre: 'Nombre', correo: 'correo@correo.com', roles: 'ADMIN, OPERATOR' },
+    { nombre: 'Nombre', correo: 'correo@correo.com', roles: 'ADMIN, OPERATOR' },
+    { nombre: 'Nombre', correo: 'correo@correo.com', roles: 'ADMIN, OPERATOR' },
+    { nombre: 'Nombre', correo: 'correo@correo.com', roles: 'ADMIN, OPERATOR' },
+    { nombre: 'Nombre', correo: 'correo@correo.com', roles: 'ADMIN, OPERATOR' },
+    { nombre: 'Nombre', correo: 'correo@correo.com', roles: 'ADMIN, OPERATOR' },
+    { nombre: 'Nombre', correo: 'correo@correo.com', roles: 'ADMIN, OPERATOR' },
+    { nombre: 'Nombre', correo: 'correo@correo.com', roles: 'ADMIN, OPERATOR' },
+    { nombre: 'Nombre', correo: 'correo@correo.com', roles: 'ADMIN, OPERATOR' },
+    { nombre: 'Nombre', correo: 'correo@correo.com', roles: 'ADMIN, OPERATOR' },
+    { nombre: 'Nombre', correo: 'correo@correo.com', roles: 'ADMIN, OPERATOR' },
+    { nombre: 'Nombre', correo: 'correo@correo.com', roles: 'ADMIN, OPERATOR' },
+    { nombre: 'Nombre', correo: 'correo@correo.com', roles: 'ADMIN, OPERATOR' },
+    { nombre: 'Nombre', correo: 'correo@correo.com', roles: 'ADMIN, OPERATOR' },
+    { nombre: 'Nombre', correo: 'correo@correo.com', roles: 'ADMIN, OPERATOR' },
+    { nombre: 'Nombre', correo: 'correo@correo.com', roles: 'ADMIN, OPERATOR' },
+    { nombre: 'Nombre', correo: 'correo@correo.com', roles: 'ADMIN, OPERATOR' },
+    { nombre: 'Nombre', correo: 'correo@correo.com', roles: 'ADMIN, OPERATOR' },
+    { nombre: 'Nombre', correo: 'correo@correo.com', roles: 'ADMIN, OPERATOR' },
+    { nombre: 'Nombre', correo: 'correo@correo.com', roles: 'ADMIN, OPERATOR' },
+    { nombre: 'Nombre', correo: 'correo@correo.com', roles: 'ADMIN, OPERATOR' },
+    { nombre: 'Nombre', correo: 'correo@correo.com', roles: 'ADMIN, OPERATOR' },
+    { nombre: 'Nombre', correo: 'correo@correo.com', roles: 'ADMIN, OPERATOR' },
+    { nombre: 'Nombre', correo: 'correo@correo.com', roles: 'ADMIN, OPERATOR' },
+    { nombre: 'Nombre', correo: 'correo@correo.com', roles: 'ADMIN, OPERATOR' },
+    { nombre: 'Nombre', correo: 'correo@correo.com', roles: 'ADMIN, OPERATOR' },
+    { nombre: 'Nombre', correo: 'correo@correo.com', roles: 'ADMIN, OPERATOR' },
+    { nombre: 'Nombre', correo: 'correo@correo.com', roles: 'ADMIN, OPERATOR' },
+    { nombre: 'Nombre', correo: 'correo@correo.com', roles: 'ADMIN, OPERATOR' },
+    { nombre: 'Nombre', correo: 'correo@correo.com', roles: 'ADMIN, OPERATOR' },
     { nombre: 'Nombre', correo: 'correo@correo.com', roles: 'ADMIN, OPERATOR' },
     { nombre: 'Nombre', correo: 'correo@correo.com', roles: 'ADMIN, OPERATOR' },
     { nombre: 'Nombre', correo: 'correo@correo.com', roles: 'ADMIN, OPERATOR' },
     { nombre: 'Nombre', correo: 'correo@correo.com', roles: 'ADMIN, OPERATOR' },
     { nombre: 'Nombre', correo: 'correo@correo.com', roles: 'ADMIN, OPERATOR' },
   ];
+  dataByPage: any = [];
+
+  pageSize: number = environment.pageSizeUser;
+
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.loadData();
+  }
+
+  loadData(page: number = 0) {
+    this.dataByPage = this.data.slice(
+      page * this.pageSize,
+      page * this.pageSize + this.pageSize
+    );
+  }
+
+  userChangedPage(page: number) {
+    this.loadData(page);
+  }
 }

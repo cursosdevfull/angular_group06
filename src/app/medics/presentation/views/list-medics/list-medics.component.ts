@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MetaDataColumn } from 'src/app/shared/services/meta-data-column';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'amb-list-medics',
@@ -104,6 +105,8 @@ export class ListMedicsComponent implements OnInit {
 
   dataByPage: any = [];
 
+  pageSize: number = environment.pageSize;
+
   constructor() {}
 
   ngOnInit(): void {
@@ -111,15 +114,13 @@ export class ListMedicsComponent implements OnInit {
   }
 
   loadData(page: number = 0) {
-    this.dataByPage = this.data.slice(page * 10, page * 10 + 10);
+    this.dataByPage = this.data.slice(
+      page * this.pageSize,
+      page * this.pageSize + this.pageSize
+    );
   }
 
-  changePage(evt: {
-    length: number;
-    pageIndex: number;
-    pageSize: number;
-    previousPageIndex?: number;
-  }) {
-    this.loadData(evt.pageIndex);
+  userChangedPage(page: number) {
+    this.loadData(page);
   }
 }

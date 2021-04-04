@@ -17,9 +17,7 @@
     </ng-container>
   </amb-table>
 </perfect-scrollbar>
-<mat-paginator
-  pageSize="10"
-  [length]="data?.length"
-  showFirstLastButtons="true"
-  (page)="changePage($event)"
-></mat-paginator>
+<amb-paginator
+  (onDataChange)="userChangedPage($event)"
+  [totalRecords]="data.length"
+></amb-paginator>
