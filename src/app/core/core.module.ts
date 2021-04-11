@@ -11,6 +11,7 @@ import { HeaderComponent } from './presentation/views/header/header.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatTooltipModule } from '@angular/material/tooltip';
 @NgModule({
   declarations: [
     PageLoginComponent,
@@ -26,6 +27,7 @@ import { MatMenuModule } from '@angular/material/menu';
     MatButtonModule,
     MatToolbarModule,
     FlexLayoutModule,
+    MatTooltipModule,
     MatMenuModule,
   ],
   exports: [PageLoginComponent, MenuComponent, HeaderComponent],

@@ -9,4 +9,10 @@ export class AppComponent {
   title = 'ambulance';
   listUsers = ['User1', 'User2', 'User3'];
   fecha = new Date();
+  expanded = true;
+
+  showExpand(expanded: boolean) {
+    console.log(expanded);
+    this.expanded = expanded;
+  }
 }
