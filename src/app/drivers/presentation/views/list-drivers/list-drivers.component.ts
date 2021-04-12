@@ -5,6 +5,7 @@ import { PaginatorComponent } from 'src/app/shared/components/paginator/paginato
 import { MetaDataColumn } from 'src/app/shared/services/meta-data-column';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 import { environment } from 'src/environments/environment';
+import { FormDriverComponent } from '../form-driver/form-driver.component';
 
 @Component({
   selector: 'amb-list-drivers',
@@ -69,9 +70,6 @@ export class ListDriversComponent extends PaginatorData implements OnInit {
       );
 
       if (totalRecordsInCurrentPage.length > 0) {
-        /*  (this.paginatorComponent as PaginatorComponent).goToPage(
-          this.currentPage
-        ); */
         this.loadData(this.currentPage);
       } else if (this.currentPage > 0) {
         (this.paginatorComponent as PaginatorComponent).goToPage(
@@ -83,5 +81,14 @@ export class ListDriversComponent extends PaginatorData implements OnInit {
         this.loadData();
       }
     });
+  }
+
+  edit(record: any) {
+    const options = {
+      disableClose: true,
+      panelClass: 'container-modal',
+      data: record,
+    };
+    this.utils.openModal(FormDriverComponent, options);
   }
 }

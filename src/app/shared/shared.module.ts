@@ -19,6 +19,9 @@ import {
 import { PaginatorComponent } from './components/paginator/paginator.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ConfirmComponent } from './components/confirm/confirm.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -55,6 +58,11 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MatDialogModule,
     PaginatorComponent,
     ConfirmComponent,
+    MatToolbarModule,
+    FlexLayoutModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   providers: [
     {
