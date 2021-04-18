@@ -11,7 +11,7 @@
           mat-button
           color="primary"
           matTooltip="EDITAR"
-          (click)="edit(row)"
+          (click)="openForm($event, row)"
         >
           <mat-icon>edit</mat-icon>
         </button>
@@ -19,7 +19,7 @@
           mat-button
           color="accent"
           matTooltip="ELIMINAR"
-          (click)="delete(row)"
+          (click)="delete($event, row)"
           [disabled]="row.rol !== tipoRoles.OPERADOR"
         >
           <mat-icon>delete</mat-icon>
@@ -32,3 +32,7 @@
   (onDataChange)="loadData($event)"
   [totalRecords]="data.length"
 ></amb-paginator>
+<amb-keypad
+  [keypadButtons]="listKeyPadButtons"
+  (clickButton)="actionButton($event)"
+></amb-keypad>

@@ -12,6 +12,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 @NgModule({
   declarations: [
     PageLoginComponent,
@@ -29,6 +31,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     FlexLayoutModule,
     MatTooltipModule,
     MatMenuModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   exports: [PageLoginComponent, MenuComponent, HeaderComponent],
 })

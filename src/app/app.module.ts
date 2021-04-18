@@ -15,6 +15,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { Paginator } from './shared/classes/paginator';
 import { SharedModule } from './shared/shared.module';
+import { ConfigModule } from './config/modules/config.module';
+import { AMB_Config } from './config/constants/config.constants';
+
 @NgModule({
   declarations: [AppComponent, ItemComponent],
   imports: [
@@ -27,6 +30,7 @@ import { SharedModule } from './shared/shared.module';
     HttpClientModule,
     MatIconModule,
     FlexLayoutModule,
+    ConfigModule.forRoot(AMB_Config),
   ],
   providers: [
     LogService,

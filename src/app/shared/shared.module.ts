@@ -22,6 +22,10 @@ import { ConfirmComponent } from './components/confirm/confirm.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import { KeypadComponent } from './components/keypad/keypad.component';
+import { ExportComponent } from './components/export/export.component';
+import { MatListModule } from '@angular/material/list';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -33,6 +37,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     TableComponent,
     PaginatorComponent,
     ConfirmComponent,
+    KeypadComponent,
+    ExportComponent,
   ],
   imports: [
     CommonModule,
@@ -44,6 +50,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MatPaginatorModule,
     MatButtonModule,
     MatDialogModule,
+    MatTooltipModule,
+    MatListModule,
   ],
   exports: [
     TitleComponent,
@@ -63,6 +71,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
+    KeypadComponent,
+    MatBottomSheetModule,
+    ExportComponent,
   ],
   providers: [
     {

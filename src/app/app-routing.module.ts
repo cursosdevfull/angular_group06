@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { PageLoginComponent } from './core/presentation/pages/page-login/page-login.component';
 
 const routes: Routes = [
-  { path: '', component: PageLoginComponent },
+  { path: '', component: PageLoginComponent, data: { fullscreen: true } },
   {
     path: 'medics',
     loadChildren: () =>
@@ -26,6 +26,7 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
+    data: { fullscreen: false },
     loadChildren: () =>
       import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
   },
