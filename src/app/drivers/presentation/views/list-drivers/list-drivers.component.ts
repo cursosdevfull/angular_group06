@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { PaginatorData } from 'src/app/shared/classes/paginator-data';
 import { PaginatorComponent } from 'src/app/shared/components/paginator/paginator.component';
+import { Roles } from 'src/app/shared/enums/roles.enum';
 import { MetaDataColumn } from 'src/app/shared/services/meta-data-column';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 import { environment } from 'src/environments/environment';
@@ -23,29 +25,185 @@ export class ListDriversComponent extends PaginatorData implements OnInit {
     { field: 'licencia', title: 'Licencia de conducir' },
   ];
   data: any[] = [
-    { id: 1, nombre: 'Nombre', apellido: 'Apellido', licencia: 'Licencia' },
-    { id: 2, nombre: 'Nombre', apellido: 'Apellido', licencia: 'Licencia' },
-    { id: 3, nombre: 'Nombre', apellido: 'Apellido', licencia: 'Licencia' },
-    { id: 4, nombre: 'Nombre', apellido: 'Apellido', licencia: 'Licencia' },
-    { id: 5, nombre: 'Nombre', apellido: 'Apellido', licencia: 'Licencia' },
-    { id: 6, nombre: 'Nombre', apellido: 'Apellido', licencia: 'Licencia' },
-    { id: 7, nombre: 'Nombre', apellido: 'Apellido', licencia: 'Licencia' },
-    { id: 8, nombre: 'Nombre', apellido: 'Apellido', licencia: 'Licencia' },
-    { id: 9, nombre: 'Nombre', apellido: 'Apellido', licencia: 'Licencia' },
-    { id: 10, nombre: 'Nombre', apellido: 'Apellido', licencia: 'Licencia' },
-    { id: 11, nombre: 'Nombre', apellido: 'Apellido', licencia: 'Licencia' },
-    { id: 12, nombre: 'Nombre', apellido: 'Apellido', licencia: 'Licencia' },
-    { id: 13, nombre: 'Nombre', apellido: 'Apellido', licencia: 'Licencia' },
-    { id: 14, nombre: 'Nombre', apellido: 'Apellido', licencia: 'Licencia' },
-    { id: 15, nombre: 'Nombre', apellido: 'Apellido', licencia: 'Licencia' },
-    { id: 16, nombre: 'Nombre', apellido: 'Apellido', licencia: 'Licencia' },
-    { id: 17, nombre: 'Nombre', apellido: 'Apellido', licencia: 'Licencia' },
-    { id: 18, nombre: 'Nombre', apellido: 'Apellido', licencia: 'Licencia' },
-    { id: 19, nombre: 'Nombre', apellido: 'Apellido', licencia: 'Licencia' },
-    { id: 20, nombre: 'Nombre', apellido: 'Apellido', licencia: 'Licencia' },
-    { id: 21, nombre: 'Nombre', apellido: 'Apellido', licencia: 'Licencia' },
-    { id: 22, nombre: 'Nombre', apellido: 'Apellido', licencia: 'Licencia' },
+    {
+      id: 1,
+      nombre: 'Sergio',
+      apellido: 'Barrientos',
+      licencia: 'abc-123',
+      marca: false,
+      rol: 2,
+    },
+    {
+      id: 2,
+      nombre: 'Nombre',
+      apellido: 'Apellido',
+      licencia: 'Licencia',
+      marca: false,
+      rol: 2,
+    },
+    {
+      id: 3,
+      nombre: 'Nombre',
+      apellido: 'Apellido',
+      licencia: 'Licencia',
+      marca: false,
+      rol: 1,
+    },
+    {
+      id: 4,
+      nombre: 'Nombre',
+      apellido: 'Apellido',
+      licencia: 'Licencia',
+      marca: false,
+      rol: 2,
+    },
+    {
+      id: 5,
+      nombre: 'Nombre',
+      apellido: 'Apellido',
+      licencia: 'Licencia',
+      marca: false,
+      rol: 2,
+    },
+    {
+      id: 6,
+      nombre: 'Nombre',
+      apellido: 'Apellido',
+      licencia: 'Licencia',
+      marca: false,
+      rol: 1,
+    },
+    {
+      id: 7,
+      nombre: 'Nombre',
+      apellido: 'Apellido',
+      licencia: 'Licencia',
+      marca: false,
+      rol: 2,
+    },
+    {
+      id: 8,
+      nombre: 'Nombre',
+      apellido: 'Apellido',
+      licencia: 'Licencia',
+      marca: false,
+      rol: 2,
+    },
+    {
+      id: 9,
+      nombre: 'Nombre',
+      apellido: 'Apellido',
+      licencia: 'Licencia',
+      marca: false,
+      rol: 2,
+    },
+    {
+      id: 10,
+      nombre: 'Nombre',
+      apellido: 'Apellido',
+      licencia: 'Licencia',
+      marca: false,
+      rol: 2,
+    },
+    {
+      id: 11,
+      nombre: 'Nombre',
+      apellido: 'Apellido',
+      licencia: 'Licencia',
+      marca: false,
+      rol: 2,
+    },
+    {
+      id: 12,
+      nombre: 'Nombre',
+      apellido: 'Apellido',
+      licencia: 'Licencia',
+      marca: false,
+      rol: 2,
+    },
+    {
+      id: 13,
+      nombre: 'Nombre',
+      apellido: 'Apellido',
+      licencia: 'Licencia',
+      marca: false,
+      rol: 2,
+    },
+    {
+      id: 14,
+      nombre: 'Nombre',
+      apellido: 'Apellido',
+      licencia: 'Licencia',
+      marca: false,
+      rol: 2,
+    },
+    {
+      id: 15,
+      nombre: 'Nombre',
+      apellido: 'Apellido',
+      licencia: 'Licencia',
+      marca: false,
+      rol: 2,
+    },
+    {
+      id: 16,
+      nombre: 'Nombre',
+      apellido: 'Apellido',
+      licencia: 'Licencia',
+      marca: false,
+      rol: 2,
+    },
+    {
+      id: 17,
+      nombre: 'Nombre',
+      apellido: 'Apellido',
+      licencia: 'Licencia',
+      marca: false,
+      rol: 2,
+    },
+    {
+      id: 18,
+      nombre: 'Nombre',
+      apellido: 'Apellido',
+      licencia: 'Licencia',
+      marca: false,
+      rol: 2,
+    },
+    {
+      id: 19,
+      nombre: 'Nombre',
+      apellido: 'Apellido',
+      licencia: 'Licencia',
+      marca: false,
+      rol: 2,
+    },
+    {
+      id: 20,
+      nombre: 'Nombre',
+      apellido: 'Apellido',
+      licencia: 'Licencia',
+      marca: false,
+      rol: 2,
+    },
+    {
+      id: 21,
+      nombre: 'Nombre',
+      apellido: 'Apellido',
+      licencia: 'Licencia',
+      marca: false,
+      rol: 2,
+    },
+    {
+      id: 22,
+      nombre: 'Nombre',
+      apellido: 'Apellido',
+      licencia: 'Licencia',
+      marca: false,
+      rol: 2,
+    },
   ];
+
+  tipoRoles: any = Roles;
 
   constructor(private readonly utils: UtilsService) {
     super();
@@ -89,6 +247,17 @@ export class ListDriversComponent extends PaginatorData implements OnInit {
       panelClass: 'container-modal',
       data: record,
     };
-    this.utils.openModal(FormDriverComponent, options);
+    const reference: MatDialogRef<FormDriverComponent> = this.utils.openModal(
+      FormDriverComponent,
+      options
+    );
+
+    reference.afterClosed().subscribe((response) => {
+      if (!response) {
+        return;
+      }
+
+      console.log('edición', response);
+    });
   }
 }

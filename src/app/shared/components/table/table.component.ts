@@ -63,4 +63,10 @@ export class TableComponent implements OnInit {
   handlerPage(evt: any) {
     console.log(evt.pageIndex);
   }
+
+  markRecord(row: any) {
+    if (row.hasOwnProperty('marca')) {
+      row.marca = !row.marca;
+    }
+  }
 }

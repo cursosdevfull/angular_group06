@@ -20,6 +20,7 @@
           color="accent"
           matTooltip="ELIMINAR"
           (click)="delete(row)"
+          [disabled]="row.rol !== tipoRoles.OPERADOR"
         >
           <mat-icon>delete</mat-icon>
         </button>

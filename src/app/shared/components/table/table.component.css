@@ -7,3 +7,7 @@
 .highline:hover {
   background-color: rgba(0, 0, 0, 0.1);
 }
+
+.marcado {
+  background-color: rgb(247, 247, 192) !important;
+}
