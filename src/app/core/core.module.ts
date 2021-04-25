@@ -14,6 +14,11 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { ReactiveFormsModule } from '@angular/forms';
+import { AuthOperation } from './infraestructure/auth.operation';
+import { AuthRepository } from './application/auth.repository';
+import { StorageRepository } from './application/storage.repository';
+import { StorageOperation } from './infraestructure/storage.operation';
 @NgModule({
   declarations: [
     PageLoginComponent,
@@ -33,7 +38,12 @@ import { MatInputModule } from '@angular/material/input';
     MatMenuModule,
     MatFormFieldModule,
     MatInputModule,
+    ReactiveFormsModule,
   ],
   exports: [PageLoginComponent, MenuComponent, HeaderComponent],
+  providers: [
+    { provide: AuthRepository, useClass: AuthOperation },
+    { provide: StorageRepository, useClass: StorageOperation },
+  ],
 })
 export class CoreModule {}
