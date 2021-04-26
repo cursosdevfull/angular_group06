@@ -19,11 +19,11 @@ export class FormDriverComponent implements OnInit {
     this.fg = new FormGroup({
       id: new FormControl(this.data?.id),
       nombre: new FormControl(this.data?.nombre, Validators.required),
-      apellido: new FormControl(this.data?.apellido, Validators.required),
+      /*       apellido: new FormControl(this.data?.apellido, Validators.required),
       licencia: new FormControl(this.data?.licencia, [
         Validators.required,
         Validators.pattern(/^[a-z]{3}-[0-9]{3}$/g),
-      ]),
+      ]), */
     });
   }
 

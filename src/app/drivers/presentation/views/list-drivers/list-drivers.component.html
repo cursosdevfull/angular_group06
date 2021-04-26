@@ -2,7 +2,7 @@
   <amb-table
     [data]="dataByPage"
     [metaDataColumns]="metaDataColumns"
-    totalRecords="1000"
+    [totalRecords]="totalRecords"
   >
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef></th>
@@ -20,7 +20,6 @@
           color="accent"
           matTooltip="ELIMINAR"
           (click)="delete($event, row)"
-          [disabled]="row.rol !== tipoRoles.OPERADOR"
         >
           <mat-icon>delete</mat-icon>
         </button>
@@ -30,7 +29,7 @@
 </perfect-scrollbar>
 <amb-paginator
   (onDataChange)="loadData($event)"
-  [totalRecords]="data.length"
+  [totalRecords]="totalRecords"
 ></amb-paginator>
 <amb-keypad
   [keypadButtons]="listKeyPadButtons"

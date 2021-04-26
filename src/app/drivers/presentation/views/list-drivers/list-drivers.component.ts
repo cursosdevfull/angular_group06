@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
+import { DriverUseCase } from 'src/app/drivers/application/driver.usecase';
+import { Driver } from 'src/app/drivers/domain/driver.interface';
 import { PaginatorData } from 'src/app/shared/classes/paginator-data';
 import {
   ACTION_EXPORT,
@@ -26,187 +28,9 @@ export class ListDriversComponent extends PaginatorData implements OnInit {
 
   metaDataColumns: MetaDataColumn[] = [
     { field: 'nombre', title: 'Nombre principal' },
-    { field: 'apellido', title: 'Apellido paterno' },
-    { field: 'licencia', title: 'Licencia de conducir' },
   ];
-  data: any[] = [
-    {
-      id: 1,
-      nombre: 'Sergio',
-      apellido: 'Barrientos',
-      licencia: 'abc-123',
-      marca: false,
-      rol: 2,
-    },
-    {
-      id: 2,
-      nombre: 'Nombre',
-      apellido: 'Apellido',
-      licencia: 'Licencia',
-      marca: false,
-      rol: 2,
-    },
-    {
-      id: 3,
-      nombre: 'Nombre',
-      apellido: 'Apellido',
-      licencia: 'Licencia',
-      marca: false,
-      rol: 1,
-    },
-    {
-      id: 4,
-      nombre: 'Nombre',
-      apellido: 'Apellido',
-      licencia: 'Licencia',
-      marca: false,
-      rol: 2,
-    },
-    {
-      id: 5,
-      nombre: 'Nombre',
-      apellido: 'Apellido',
-      licencia: 'Licencia',
-      marca: false,
-      rol: 2,
-    },
-    {
-      id: 6,
-      nombre: 'Nombre',
-      apellido: 'Apellido',
-      licencia: 'Licencia',
-      marca: false,
-      rol: 1,
-    },
-    {
-      id: 7,
-      nombre: 'Nombre',
-      apellido: 'Apellido',
-      licencia: 'Licencia',
-      marca: false,
-      rol: 2,
-    },
-    {
-      id: 8,
-      nombre: 'Nombre',
-      apellido: 'Apellido',
-      licencia: 'Licencia',
-      marca: false,
-      rol: 2,
-    },
-    {
-      id: 9,
-      nombre: 'Nombre',
-      apellido: 'Apellido',
-      licencia: 'Licencia',
-      marca: false,
-      rol: 2,
-    },
-    {
-      id: 10,
-      nombre: 'Nombre',
-      apellido: 'Apellido',
-      licencia: 'Licencia',
-      marca: false,
-      rol: 2,
-    },
-    {
-      id: 11,
-      nombre: 'Nombre',
-      apellido: 'Apellido',
-      licencia: 'Licencia',
-      marca: false,
-      rol: 2,
-    },
-    {
-      id: 12,
-      nombre: 'Nombre',
-      apellido: 'Apellido',
-      licencia: 'Licencia',
-      marca: false,
-      rol: 2,
-    },
-    {
-      id: 13,
-      nombre: 'Nombre',
-      apellido: 'Apellido',
-      licencia: 'Licencia',
-      marca: false,
-      rol: 2,
-    },
-    {
-      id: 14,
-      nombre: 'Nombre',
-      apellido: 'Apellido',
-      licencia: 'Licencia',
-      marca: false,
-      rol: 2,
-    },
-    {
-      id: 15,
-      nombre: 'Nombre',
-      apellido: 'Apellido',
-      licencia: 'Licencia',
-      marca: false,
-      rol: 2,
-    },
-    {
-      id: 16,
-      nombre: 'Nombre',
-      apellido: 'Apellido',
-      licencia: 'Licencia',
-      marca: false,
-      rol: 2,
-    },
-    {
-      id: 17,
-      nombre: 'Nombre',
-      apellido: 'Apellido',
-      licencia: 'Licencia',
-      marca: false,
-      rol: 2,
-    },
-    {
-      id: 18,
-      nombre: 'Nombre',
-      apellido: 'Apellido',
-      licencia: 'Licencia',
-      marca: false,
-      rol: 2,
-    },
-    {
-      id: 19,
-      nombre: 'Nombre',
-      apellido: 'Apellido',
-      licencia: 'Licencia',
-      marca: false,
-      rol: 2,
-    },
-    {
-      id: 20,
-      nombre: 'Nombre',
-      apellido: 'Apellido',
-      licencia: 'Licencia',
-      marca: false,
-      rol: 2,
-    },
-    {
-      id: 21,
-      nombre: 'Nombre',
-      apellido: 'Apellido',
-      licencia: 'Licencia',
-      marca: false,
-      rol: 2,
-    },
-    {
-      id: 22,
-      nombre: 'Nombre',
-      apellido: 'Apellido',
-      licencia: 'Licencia',
-      marca: false,
-      rol: 2,
-    },
-  ];
+  data: Driver[] = [];
+  totalRecords = 0;
 
   tipoRoles: any = Roles;
   listKeyPadButtons: KeyPadButton[] = [
@@ -224,30 +48,47 @@ export class ListDriversComponent extends PaginatorData implements OnInit {
     },
   ];
 
-  constructor(private readonly utils: UtilsService) {
+  constructor(
+    private readonly utils: UtilsService,
+    private readonly driverUseCase: DriverUseCase
+  ) {
     super();
+    this.list(0);
+  }
+
+  list(page: number) {
+    this.driverUseCase
+      .listByPage(page, environment.pageSize)
+      .subscribe((response: { records: Driver[]; totalRecords: number }) => {
+        this.dataByPage = response.records;
+        this.totalRecords = response.totalRecords;
+      });
   }
 
   delete(evt: any, record: any) {
     evt.stopPropagation();
     const observableConfirm: Observable<string> = this.utils.confirm(
-      `¿Quiere eliminar el piloto "${record.nombre} ${record.apellido}"?`
+      `¿Quiere eliminar el piloto "${record.nombre}"?`
     );
     observableConfirm.subscribe((response: string) => {
       if (!response) {
         return;
       }
 
-      const matchedRecord = this.data.findIndex(
+      this.driverUseCase.delete(record).subscribe(() => {
+        this.list(0);
+      });
+
+      /* const matchedRecord = this.data.findIndex(
         (el: any) => el.id === record.id
       );
       this.data.splice(matchedRecord, 1);
       const totalRecordsInCurrentPage = this.data.slice(
         this.currentPage * environment.pageSize,
         this.currentPage * environment.pageSize + environment.pageSize
-      );
+      ); */
 
-      if (totalRecordsInCurrentPage.length > 0) {
+      /*       if (totalRecordsInCurrentPage.length > 0) {
         this.loadData(this.currentPage);
       } else if (this.currentPage > 0) {
         (this.paginatorComponent as PaginatorComponent).goToPage(
@@ -257,7 +98,7 @@ export class ListDriversComponent extends PaginatorData implements OnInit {
       } else {
         (this.paginatorComponent as PaginatorComponent).goToPage(0);
         this.loadData();
-      }
+      } */
     });
   }
 
@@ -279,9 +120,14 @@ export class ListDriversComponent extends PaginatorData implements OnInit {
       }
 
       if (response.id) {
-        console.log('edición', response);
+        this.driverUseCase.update(response).subscribe((response: Driver) => {
+          this.list(0);
+        });
       } else {
-        console.log('inserción', response);
+        delete response.id;
+        this.driverUseCase.insert(response).subscribe((response: Driver) => {
+          this.list(0);
+        });
       }
     });
   }

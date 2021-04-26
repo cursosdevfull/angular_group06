@@ -24,7 +24,7 @@ import { MetaDataColumn } from '../../services/meta-data-column';
 export class TableComponent implements OnInit {
   @Input() data: any = [];
   @Input() metaDataColumns: MetaDataColumn[] = [];
-  @Input() totalRecords: string = '';
+  @Input() totalRecords: number = 0;
   @ViewChild(MatTable, { static: true }) table: MatTable<any> | undefined;
   @ContentChildren(MatColumnDef, { descendants: true }) columnsDef:
     | QueryList<MatColumnDef>

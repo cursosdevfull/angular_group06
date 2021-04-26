@@ -9,7 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { LogService } from './shared/services/log.service';
 import { IconService } from './shared/services/icon.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatPaginatorIntl } from '@angular/material/paginator';
@@ -18,6 +18,7 @@ import { SharedModule } from './shared/shared.module';
 import { ConfigModule } from './config/modules/config.module';
 import { AMB_Config } from './config/constants/config.constants';
 import { AuthenticationGuard } from './shared/guards/authentication.guard';
+import { TokenInterceptor } from './shared/services/token.interceptor';
 
 @NgModule({
   declarations: [AppComponent, ItemComponent],
@@ -37,6 +38,7 @@ import { AuthenticationGuard } from './shared/guards/authentication.guard';
     LogService,
     { provide: MatPaginatorIntl, useClass: Paginator },
     AuthenticationGuard,
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     //{provide: MenuService, useClass: MenuService}
   ],
   bootstrap: [AppComponent],

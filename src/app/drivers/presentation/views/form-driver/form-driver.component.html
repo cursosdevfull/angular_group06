@@ -12,7 +12,7 @@
       <input type="text" matInput formControlName="nombre" required />
       <mat-error>Este campo es obligatorio</mat-error>
     </mat-form-field>
-    <mat-form-field appearance="outline">
+    <!--     <mat-form-field appearance="outline">
       <mat-label>Apellido</mat-label>
       <input type="text" matInput formControlName="apellido" required />
       <mat-error>Este campo es obligatorio</mat-error>
@@ -26,7 +26,7 @@
       <mat-error *ngIf="fg.get('licencia')?.hasError('pattern')"
         >La licencia debe tener el siguiente formato: abc-123</mat-error
       >
-    </mat-form-field>
+    </mat-form-field> -->
     <div fxLayout fxLayoutAlign="space-between center" fxLayoutGap="20px">
       <div>
         <span class="error" *ngIf="fg.invalid"> Campos inválidos </span>

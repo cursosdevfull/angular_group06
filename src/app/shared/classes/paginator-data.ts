@@ -10,12 +10,15 @@ export abstract class PaginatorData {
   pageSize: number = environment.pageSize;
   currentPage: number = 0;
 
+  abstract list(page: number): void;
+
   loadData(page: number = 0) {
     this.currentPage = page;
-    this.dataByPage = this.data.slice(
+    this.list(this.currentPage);
+    /*     this.dataByPage = this.data.slice(
       page * this.pageSize,
       page * this.pageSize + this.pageSize
-    );
+    ); */
   }
 
   ngOnInit(): void {

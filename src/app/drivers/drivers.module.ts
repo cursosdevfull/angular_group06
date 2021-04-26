@@ -6,10 +6,21 @@ import { PageDriverComponent } from './presentation/pages/page-driver/page-drive
 import { ListDriversComponent } from './presentation/views/list-drivers/list-drivers.component';
 import { SharedModule } from '../shared/shared.module';
 import { FormDriverComponent } from './presentation/views/form-driver/form-driver.component';
+import { DriverOperation } from './infraestructure/driver.operation';
+import { DriverRepository } from './application/driver.repository';
+import { DriverUseCase } from './application/driver.usecase';
 
 @NgModule({
-  declarations: [PageDriverComponent, ListDriversComponent, FormDriverComponent],
+  declarations: [
+    PageDriverComponent,
+    ListDriversComponent,
+    FormDriverComponent,
+  ],
   imports: [CommonModule, DriversRoutingModule, SharedModule],
   exports: [PageDriverComponent],
+  providers: [
+    { provide: DriverRepository, useClass: DriverOperation },
+    DriverUseCase,
+  ],
 })
 export class DriversModule {}
