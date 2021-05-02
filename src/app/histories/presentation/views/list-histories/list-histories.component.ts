@@ -1,97 +1,69 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
+import { History } from '../../../domain/history.interface';
+import { HistoryUseCase } from 'src/app/histories/application/history.usecase';
 import { PaginatorData } from 'src/app/shared/classes/paginator-data';
+import {
+  ACTION_NEW,
+  ACTION_EXPORT,
+} from 'src/app/shared/components/keypad/keypad.component';
+import { PaginatorComponent } from 'src/app/shared/components/paginator/paginator.component';
+import { Roles } from 'src/app/shared/enums/roles.enum';
+import { KeyPadButton } from 'src/app/shared/interfaces/keybutton.interface';
 import { MetaDataColumn } from 'src/app/shared/services/meta-data-column';
 import { UtilsService } from 'src/app/shared/services/utils.service';
+import { environment } from 'src/environments/environment';
+import { FormHistoryComponent } from '../form-history/form-history.component';
 @Component({
   selector: 'amb-list-histories',
   templateUrl: './list-histories.component.html',
   styleUrls: ['./list-histories.component.css'],
 })
 export class ListHistoriesComponent extends PaginatorData implements OnInit {
+  @ViewChild(PaginatorComponent) paginatorComponent:
+    | PaginatorComponent
+    | undefined;
+
   metaDataColumns: MetaDataColumn[] = [
-    { field: 'id', title: 'ID' },
-    { field: 'nhistoria', title: 'Nro. Historia' },
-    { field: 'paciente', title: 'Nombre del paciente' },
-    { field: 'medico', title: 'Nombre del médico' },
+    { field: 'nombre', title: 'Nombre' },
+    { field: 'apellido', title: 'Apellido' },
+    { field: 'dni', title: 'DNI' },
   ];
-  data: any[] = [
+  data: History[] = [];
+  totalRecords = 0;
+
+  tipoRoles: any = Roles;
+  listKeyPadButtons: KeyPadButton[] = [
     {
-      id: 1,
-      nhistoria: '100',
-      paciente: 'Carlos Montero',
-      medico: 'Juan Huapaya',
+      icon: 'add',
+      color: 'primary',
+      action: ACTION_NEW,
+      tooltip: 'AGREGAR HISTORIA',
     },
     {
-      id: 2,
-      nhistoria: '101',
-      paciente: 'Carlos Montero',
-      medico: 'Juan Huapaya',
-    },
-    {
-      id: 3,
-      nhistoria: '102',
-      paciente: 'Carlos Montero',
-      medico: 'Juan Huapaya',
-    },
-    {
-      id: 4,
-      nhistoria: '103',
-      paciente: 'Carlos Montero',
-      medico: 'Juan Huapaya',
-    },
-    {
-      id: 5,
-      nhistoria: '104',
-      paciente: 'Carlos Montero',
-      medico: 'Juan Huapaya',
-    },
-    {
-      id: 6,
-      nhistoria: '105',
-      paciente: 'Carlos Montero',
-      medico: 'Juan Huapaya',
-    },
-    {
-      id: 7,
-      nhistoria: '106',
-      paciente: 'Carlos Montero',
-      medico: 'Juan Huapaya',
-    },
-    {
-      id: 8,
-      nhistoria: '107',
-      paciente: 'Carlos Montero',
-      medico: 'Juan Huapaya',
-    },
-    {
-      id: 9,
-      nhistoria: '108',
-      paciente: 'Carlos Montero',
-      medico: 'Juan Huapaya',
-    },
-    {
-      id: 10,
-      nhistoria: '109',
-      paciente: 'Carlos Montero',
-      medico: 'Juan Huapaya',
-    },
-    {
-      id: 11,
-      nhistoria: '110',
-      paciente: 'Carlos Montero',
-      medico: 'Juan Huapaya',
-    },
-    {
-      id: 12,
-      nhistoria: '111',
-      paciente: 'Carlos Montero',
-      medico: 'Juan Huapaya',
+      icon: 'cloud_download',
+      color: 'accent',
+      action: ACTION_EXPORT,
+      tooltip: 'EXPORTAR DATA',
     },
   ];
 
-  constructor(private readonly utils: UtilsService) {
+  constructor(
+    private readonly utils: UtilsService,
+    private readonly historyUseCase: HistoryUseCase
+  ) {
     super();
+    this.list(0);
+  }
+
+  list(page: number) {
+    this.historyUseCase
+      .listByPage(page, environment.pageSize)
+      .subscribe((response: any) => {
+        this.dataByPage = response.records;
+        this.totalRecords = response.totalRecords;
+      });
   }
 
   delete(record: any) {
@@ -103,11 +75,54 @@ export class ListHistoriesComponent extends PaginatorData implements OnInit {
         return;
       }
 
-      const matchedRecord = this.data.findIndex(
-        (el: any) => el.nhistoria === record.nhistoria
-      );
-      this.data.splice(matchedRecord, 1);
-      this.loadData();
+      this.historyUseCase.delete(record).subscribe(() => {
+        this.list(0);
+      });
     });
+  }
+
+  openForm(evt: any, record: any = null) {
+    evt?.stopPropagation();
+    const options = {
+      disableClose: true,
+      panelClass: 'container-modal',
+      data: record,
+    };
+    const reference: MatDialogRef<FormHistoryComponent> = this.utils.openModal(
+      FormHistoryComponent,
+      options
+    );
+
+    reference.afterClosed().subscribe((response) => {
+      if (!response) {
+        return;
+      }
+
+      if (response.id) {
+        this.historyUseCase.update(response).subscribe((response: History) => {
+          this.list(0);
+        });
+      } else {
+        delete response.id;
+        this.historyUseCase.insert(response).subscribe((response: History) => {
+          this.list(0);
+        });
+      }
+    });
+  }
+
+  openOptionsExport() {
+    this.utils.openSheet();
+  }
+
+  actionButton(action: string) {
+    switch (action) {
+      case ACTION_NEW:
+        this.openForm(null, null);
+        break;
+      case ACTION_EXPORT:
+        this.openOptionsExport();
+        break;
+    }
   }
 }

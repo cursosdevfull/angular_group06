@@ -2,7 +2,7 @@
   <amb-table
     [data]="dataByPage"
     [metaDataColumns]="metaDataColumns"
-    totalRecords="1000"
+    [totalRecords]="totalRecords"
   >
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef></th>
@@ -24,6 +24,9 @@
 </perfect-scrollbar>
 <amb-paginator
   (onDataChange)="loadData($event)"
-  [totalRecords]="data.length"
-  [pageSize]="pageSize"
+  [totalRecords]="totalRecords"
 ></amb-paginator>
+<amb-keypad
+  [keypadButtons]="listKeyPadButtons"
+  (clickButton)="actionButton($event)"
+></amb-keypad>
