@@ -14,8 +14,8 @@ export class MedicOperation extends MedicRepository {
   listAll(): Observable<Medic[]> {
     return this.http.get<Medic[]>(`${environment.pathAPIRest}/medics`);
   }
-  insert(medic: Medic): Observable<Medic> {
-    return this.http.post<Medic>(`${environment.pathAPIRest}/medics`, medic);
+  insert(fd: FormData): Observable<Medic> {
+    return this.http.post<Medic>(`${environment.pathAPIRest}/medics`, fd);
   }
 
   listByPage(
@@ -32,13 +32,10 @@ export class MedicOperation extends MedicRepository {
       `${environment.pathAPIRest}/medics/${medic.id}`
     );
   }
-  update(medic: Medic): Observable<Medic> {
-    const dataToSent: any = Object.assign({}, medic);
-    delete dataToSent.id;
+  update(fd: FormData, id: number): Observable<Medic> {
+    /*     const dataToSent: any = Object.assign({}, fd);
+    delete dataToSent.id; */
 
-    return this.http.put<Medic>(
-      `${environment.pathAPIRest}/medics/${medic.id}`,
-      dataToSent
-    );
+    return this.http.put<Medic>(`${environment.pathAPIRest}/medics/${id}`, fd);
   }
 }

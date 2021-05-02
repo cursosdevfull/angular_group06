@@ -7,26 +7,57 @@
 
 <mat-dialog-content>
   <form fxLayout="column" [formGroup]="fg">
-    <mat-form-field appearance="outline">
-      <mat-label>Nombre</mat-label>
-      <input type="text" matInput formControlName="nombre" required />
-      <mat-error>Este campo es obligatorio</mat-error>
-    </mat-form-field>
-    <!--     <mat-form-field appearance="outline">
-      <mat-label>Apellido</mat-label>
-      <input type="text" matInput formControlName="apellido" required />
-      <mat-error>Este campo es obligatorio</mat-error>
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <mat-label>Licencia</mat-label>
-      <input type="text" matInput formControlName="licencia" required />
-      <mat-error *ngIf="fg.get('licencia')?.hasError('required')"
-        >Este campo es obligatorio</mat-error
-      >
-      <mat-error *ngIf="fg.get('licencia')?.hasError('pattern')"
-        >La licencia debe tener el siguiente formato: abc-123</mat-error
-      >
-    </mat-form-field> -->
+    <div fxLayout fxLayoutGap="10px">
+      <div fxLayout="column" fxFlex="1 1 33%">
+        <amb-photo
+          formControlName="foto"
+          [photoByDefault]="photoToDisplay"
+        ></amb-photo>
+      </div>
+      <div fxLayout="column" fxFlex="1 1 33%">
+        <mat-form-field appearance="outline">
+          <mat-label>Nombre</mat-label>
+          <input type="text" matInput formControlName="nombre" required />
+          <mat-error>Este campo es obligatorio</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Segundo nombre</mat-label>
+          <input
+            type="text"
+            matInput
+            formControlName="segundo_nombre"
+            required
+          />
+          <mat-error>Este campo es obligatorio</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Apellido</mat-label>
+          <input type="text" matInput formControlName="apellido" required />
+          <mat-error>Este campo es obligatorio</mat-error>
+        </mat-form-field>
+      </div>
+      <div fxLayout="column" fxFlex="1 1 33%">
+        <mat-form-field appearance="outline">
+          <mat-label>CMP</mat-label>
+          <input type="text" matInput formControlName="cmp" required />
+          <mat-error>Este campo es obligatorio</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>DNI</mat-label>
+          <input type="text" matInput formControlName="dni" required />
+          <mat-error>Este campo es obligatorio</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Correo</mat-label>
+          <input type="text" matInput formControlName="correo" required />
+          <mat-error>Este campo es obligatorio</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <!--     <amb-own-my-component formControlName="ownTest"></amb-own-my-component>
+    <br />
+    {{ fg.value | json }} -->
+
     <div fxLayout fxLayoutAlign="space-between center" fxLayoutGap="20px">
       <div>
         <span class="error" *ngIf="fg.invalid"> Campos inválidos </span>

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
+import { DtoDriverExport } from 'src/app/drivers/application/driver-export.dto';
 import { DriverUseCase } from 'src/app/drivers/application/driver.usecase';
 import { Driver } from 'src/app/drivers/domain/driver.interface';
 import { PaginatorData } from 'src/app/shared/classes/paginator-data';
@@ -63,6 +64,7 @@ export class ListDriversComponent extends PaginatorData implements OnInit {
         this.dataByPage = response.records;
         this.totalRecords = response.totalRecords;
       });
+    this.paginatorComponent?.goToPage(page);
   }
 
   delete(evt: any, record: any) {
@@ -78,27 +80,6 @@ export class ListDriversComponent extends PaginatorData implements OnInit {
       this.driverUseCase.delete(record).subscribe(() => {
         this.list(0);
       });
-
-      /* const matchedRecord = this.data.findIndex(
-        (el: any) => el.id === record.id
-      );
-      this.data.splice(matchedRecord, 1);
-      const totalRecordsInCurrentPage = this.data.slice(
-        this.currentPage * environment.pageSize,
-        this.currentPage * environment.pageSize + environment.pageSize
-      ); */
-
-      /*       if (totalRecordsInCurrentPage.length > 0) {
-        this.loadData(this.currentPage);
-      } else if (this.currentPage > 0) {
-        (this.paginatorComponent as PaginatorComponent).goToPage(
-          this.currentPage - 1
-        );
-        this.loadData(this.currentPage - 1);
-      } else {
-        (this.paginatorComponent as PaginatorComponent).goToPage(0);
-        this.loadData();
-      } */
     });
   }
 
@@ -133,7 +114,10 @@ export class ListDriversComponent extends PaginatorData implements OnInit {
   }
 
   openOptionsExport() {
-    this.utils.openSheet();
+    this.driverUseCase.listAll().subscribe((response: Driver[]) => {
+      const dto = new DtoDriverExport();
+      this.utils.openSheet(response, dto, 'Listado de pilotos', 'pilotos');
+    });
   }
 
   actionButton(action: string) {

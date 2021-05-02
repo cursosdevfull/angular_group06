@@ -38,8 +38,13 @@ export class UtilsService {
     return this.dialog.open(classComponent, options);
   }
 
-  openSheet(content: any = null, dto: any = null) {
-    const options = { content, dto };
+  openSheet(
+    content: any = null,
+    dto: any = null,
+    title: string,
+    fileName: string
+  ) {
+    const options = { content, dto, title, fileName };
     this.bottomSheet.open(ExportComponent, { data: options });
   }
 }

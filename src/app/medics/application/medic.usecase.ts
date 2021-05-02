@@ -11,8 +11,8 @@ export class MedicUseCase {
     return this.medicRepository.listAll();
   }
 
-  insert(medic: Medic): Observable<Medic> {
-    return this.medicRepository.insert(medic);
+  insert(fd: FormData): Observable<Medic> {
+    return this.medicRepository.insert(fd);
   }
 
   listByPage(
@@ -26,7 +26,7 @@ export class MedicUseCase {
     return this.medicRepository.delete(medic);
   }
 
-  update(medic: Medic): Observable<Medic> {
-    return this.medicRepository.update(medic);
+  update(fd: FormData, id: number): Observable<Medic> {
+    return this.medicRepository.update(fd, id);
   }
 }

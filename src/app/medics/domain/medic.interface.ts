@@ -6,6 +6,5 @@ export interface Medic {
   cmp: string;
   dni: string;
   correo: string;
-  activo: boolean;
   foto: string;
 }

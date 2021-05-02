@@ -10,6 +10,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class FormMedicComponent implements OnInit {
   title: string = '';
+  photoToDisplay: string = '';
   fg: FormGroup;
 
   constructor(
@@ -19,12 +20,22 @@ export class FormMedicComponent implements OnInit {
     this.fg = new FormGroup({
       id: new FormControl(this.data?.id),
       nombre: new FormControl(this.data?.nombre, Validators.required),
-      /*       apellido: new FormControl(this.data?.apellido, Validators.required),
-      licencia: new FormControl(this.data?.licencia, [
-        Validators.required,
-        Validators.pattern(/^[a-z]{3}-[0-9]{3}$/g),
-      ]), */
+      segundo_nombre: new FormControl(
+        this.data?.segundo_nombre,
+        Validators.required
+      ),
+      apellido: new FormControl(this.data?.apellido, Validators.required),
+      cmp: new FormControl(this.data?.cmp, Validators.required),
+      dni: new FormControl(this.data?.dni, Validators.required),
+      correo: new FormControl(this.data?.correo, Validators.required),
     });
+
+    if (!this.data) {
+      this.fg.addControl('foto', new FormControl(null, Validators.required));
+    } else {
+      this.photoToDisplay = this.data.foto;
+      this.fg.addControl('foto', new FormControl(null));
+    }
   }
 
   ngOnInit(): void {

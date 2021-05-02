@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
+import { DtoMedicExport } from 'src/app/medics/application/medic-export.dto';
 import { MedicUseCase } from 'src/app/medics/application/medic.usecase';
 import { Medic } from 'src/app/medics/domain/medic.interface';
 import { PaginatorData } from 'src/app/shared/classes/paginator-data';
@@ -67,6 +68,7 @@ export class ListMedicsComponent extends PaginatorData implements OnInit {
         this.dataByPage = response.records;
         this.totalRecords = response.totalRecords;
       });
+    this.paginatorComponent?.goToPage(page);
   }
 
   delete(record: any) {
@@ -102,20 +104,31 @@ export class ListMedicsComponent extends PaginatorData implements OnInit {
       }
 
       if (response.id) {
-        this.medicUseCase.update(response).subscribe((response: Medic) => {
-          this.list(0);
-        });
+        const id = +response.id;
+        delete response.id;
+        const valueAsFormData = this.convertToFormData(response);
+        this.medicUseCase
+          .update(valueAsFormData, id)
+          .subscribe((response: Medic) => {
+            this.list(0);
+          });
       } else {
         delete response.id;
-        this.medicUseCase.insert(response).subscribe((response: Medic) => {
-          this.list(0);
-        });
+        const valueAsFormData = this.convertToFormData(response);
+        this.medicUseCase
+          .insert(valueAsFormData)
+          .subscribe((response: Medic) => {
+            this.list(0);
+          });
       }
     });
   }
 
   openOptionsExport() {
-    this.utils.openSheet();
+    this.medicUseCase.listAll().subscribe((response: Medic[]) => {
+      const dto = new DtoMedicExport();
+      this.utils.openSheet(response, dto, 'Listado de médicos', 'medicos');
+    });
   }
 
   actionButton(action: string) {
@@ -127,5 +140,16 @@ export class ListMedicsComponent extends PaginatorData implements OnInit {
         this.openOptionsExport();
         break;
     }
+  }
+
+  convertToFormData(obj: any): FormData {
+    const formData = new FormData();
+
+    for (const key of Object.keys(obj)) {
+      const value = obj[key];
+      formData.append(key, value);
+    }
+
+    return formData;
   }
 }

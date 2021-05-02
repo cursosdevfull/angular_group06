@@ -24,8 +24,10 @@
     "@angular/router": "~11.0.5",
     "lodash": "^4.17.21",
     "ngx-perfect-scrollbar": "^10.1.0",
+    "pdfmake": "^0.1.71",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
+    "xlsx": "^0.16.9",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {

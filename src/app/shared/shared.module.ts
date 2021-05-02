@@ -26,6 +26,9 @@ import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { KeypadComponent } from './components/keypad/keypad.component';
 import { ExportComponent } from './components/export/export.component';
 import { MatListModule } from '@angular/material/list';
+import { OwnMyComponentComponent } from './components/own-my-component/own-my-component.component';
+import { PhotoComponent } from './components/photo/photo.component';
+import { UploadDirective } from './directives/upload.directive';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -39,6 +42,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ConfirmComponent,
     KeypadComponent,
     ExportComponent,
+    OwnMyComponentComponent,
+    PhotoComponent,
+    UploadDirective,
   ],
   imports: [
     CommonModule,
@@ -74,6 +80,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     KeypadComponent,
     MatBottomSheetModule,
     ExportComponent,
+    OwnMyComponentComponent,
+    PhotoComponent,
   ],
   providers: [
     {
