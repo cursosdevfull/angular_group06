@@ -22,8 +22,8 @@ export class TokenInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    const authService = this.injector.get(AuthUseCase);
-    const accessToken = authService.getStorage('accessToken');
+    const authUseCase = this.injector.get(AuthUseCase);
+    const accessToken = authUseCase.getStorage('accessToken');
 
     const requestCloned = req.clone({
       headers: req.headers.append('Authorization', `Bearer ${accessToken}`),
@@ -32,11 +32,11 @@ export class TokenInterceptor implements HttpInterceptor {
     return next.handle(requestCloned).pipe(
       catchError((error: HttpErrorResponse) => {
         if (!(error.error instanceof ErrorEvent) && error.status === 409) {
-          const refreshToken = authService.getStorage('refreshToken');
-          return authService.getNewAccessToken(refreshToken || '').pipe(
+          const refreshToken = authUseCase.getStorage('refreshToken');
+          return authUseCase.getNewAccessToken(refreshToken || '').pipe(
             retry(3),
             mergeMap((response: any) => {
-              authService.setStorage('accessToken', response.accessToken);
+              authUseCase.setStorage('accessToken', response.accessToken);
 
               const newRequestClone = req.clone({
                 headers: req.headers.append(
@@ -48,8 +48,8 @@ export class TokenInterceptor implements HttpInterceptor {
               return next.handle(newRequestClone);
             })
           );
-        } else if (error.status === 409) {
-          return authService.logout();
+        } else if (error.status === 401) {
+          return authUseCase.logout();
         } else {
           if (error.error && error.error.result) {
             return throwError(error.error.result);

@@ -1,0 +1,14 @@
+{
+  "/api/confirmed": {
+    "target": "https://covid19.mathdro.id/",
+    "logLevel": "debug",
+    "secure": false,
+    "changeOrigin": true
+  },
+  "/api/recovered": {
+    "target": "https://covid19.mathdro.id/",
+    "logLevel": "debug",
+    "secure": false,
+    "changeOrigin": true
+  }
+}

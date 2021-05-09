@@ -1,7 +1,7 @@
 <mat-toolbar fxLayout fxLayoutAlign="end center">
   <button mat-button class="profile" [matMenuTriggerFor]="menuVert">
     <img src="/assets/img/avatar.jpg" alt="" />
-    <span>Sergio Hidalgo</span>
+    <span>{{ nameUser }}</span>
     <mat-icon>keyboard_arrow_down</mat-icon>
   </button>
   <mat-menu #menuVert="matMenu">

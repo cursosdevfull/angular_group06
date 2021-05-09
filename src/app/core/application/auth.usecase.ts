@@ -5,6 +5,7 @@ import { Auth } from '../domain/auth.interface';
 import { Token } from '../domain/token.interface';
 import { AuthRepository } from './auth.repository';
 import { StorageRepository } from './storage.repository';
+import jwt_decode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root',
@@ -50,5 +51,22 @@ export class AuthUseCase {
 
   getNewAccessToken(refreshToken: string) {
     return this.authRepository.getNewAccessToken(refreshToken);
+  }
+
+  getFieldInToken(fieldName: string) {
+    const accessToken: string = this.getStorage('accessToken') || '';
+    const payload: any = jwt_decode(accessToken);
+    /*     {
+      "iat": 1620569652,
+      "exp": 1620569682,
+      "name": "sergio",
+      "email": "sergio@correo.com",
+      "roles": [
+        "ADMIN",
+        "OPERATOR"
+      ]
+    } */
+
+    return payload[fieldName];
   }
 }

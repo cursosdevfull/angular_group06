@@ -7,9 +7,13 @@ import { AuthUseCase } from 'src/app/core/application/auth.usecase';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
+  nameUser: string = '';
+
   constructor(private readonly authUseCase: AuthUseCase) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.nameUser = this.authUseCase.getFieldInToken('name');
+  }
 
   logout() {
     this.authUseCase.logout();

@@ -7,7 +7,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "proxy": "ng serve --proxy-config proxy.conf.json"
   },
   "private": true,
   "dependencies": {
@@ -22,10 +23,14 @@
     "@angular/platform-browser": "~11.0.5",
     "@angular/platform-browser-dynamic": "~11.0.5",
     "@angular/router": "~11.0.5",
+    "@swimlane/ngx-charts": "^16.0.0",
+    "@types/socket.io-client": "^1.4.35",
+    "jwt-decode": "^3.1.2",
     "lodash": "^4.17.21",
     "ngx-perfect-scrollbar": "^10.1.0",
     "pdfmake": "^0.1.68",
     "rxjs": "~6.6.0",
+    "socket.io-client": "^2.0.3",
     "tslib": "^2.0.0",
     "xlsx": "^0.16.9",
     "zone.js": "~0.10.2"

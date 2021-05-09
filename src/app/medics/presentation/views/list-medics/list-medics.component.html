@@ -20,6 +20,7 @@
           color="accent"
           matTooltip="ELIMINAR"
           (click)="delete($event, row)"
+          *roles-allowed="['AUDITOR', 'MEDIC']"
         >
           <mat-icon>delete</mat-icon>
         </button>

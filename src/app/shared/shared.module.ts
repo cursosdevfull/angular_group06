@@ -28,6 +28,7 @@ import { ExportComponent } from './components/export/export.component';
 import { MatListModule } from '@angular/material/list';
 import { PhotoComponent } from './components/photo/photo.component';
 import { UploadDirective } from './directives/upload.directive';
+import { RolesAllowedDirective } from './directives/roles-allowed.directive';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -43,6 +44,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ExportComponent,
     PhotoComponent,
     UploadDirective,
+    RolesAllowedDirective,
   ],
   imports: [
     CommonModule,
@@ -79,6 +81,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MatBottomSheetModule,
     ExportComponent,
     PhotoComponent,
+    RolesAllowedDirective,
   ],
   providers: [
     {
