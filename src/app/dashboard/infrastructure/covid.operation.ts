@@ -13,7 +13,7 @@ export class CovidOperation extends CovidRepository {
 
   getAll(): Observable<Covid[]> {
     return this.http
-      .get<Covid[]>('/api/confirmed')
+      .get<Covid[]>('https://covid19.mathdro.id/api/confirmed')
       .pipe(map((data) => data.slice(0, 30)));
   }
 }
