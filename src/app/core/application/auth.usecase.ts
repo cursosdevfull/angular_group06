@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Auth } from '../domain/auth.interface';
 import { Token } from '../domain/token.interface';
 import { AuthRepository } from './auth.repository';
@@ -22,10 +22,12 @@ export class AuthUseCase {
     return this.authRepository.login(auth);
   }
 
-  logout() {
+  logout(): Observable<any> {
     this.isUserLogged = false;
     this.storageRepository.clear();
     this.router.navigate(['/']);
+
+    return of();
   }
 
   changeStatusUser(status: boolean) {
@@ -44,5 +46,9 @@ export class AuthUseCase {
 
   getStorage(nameProperty: string): string | null {
     return this.storageRepository.getStorage(nameProperty);
+  }
+
+  getNewAccessToken(refreshToken: string) {
+    return this.authRepository.getNewAccessToken(refreshToken);
   }
 }

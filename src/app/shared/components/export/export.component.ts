@@ -4,8 +4,10 @@ import {
   MAT_BOTTOM_SHEET_DATA,
 } from '@angular/material/bottom-sheet';
 import * as XLSX from 'xlsx';
-import pdfMake from 'pdfmake/build/pdfmake';
-import pdfFonts from 'pdfmake/build/vfs_fonts';
+/* import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts'; */
+const pdfMake = require('pdfmake/build/pdfmake');
+const pdfFonts = require('pdfmake/build/vfs_fonts');
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
@@ -63,7 +65,7 @@ export class ExportComponent implements OnInit {
     action: string
   ) {
     const dataToExport = dto.mapping(content);
-    const informationFormatted = this.getInformationFormatted(
+    const informationFormatted: any = this.getInformationFormatted(
       dataToExport,
       title
     );

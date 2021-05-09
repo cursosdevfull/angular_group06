@@ -71,7 +71,8 @@ export class ListMedicsComponent extends PaginatorData implements OnInit {
     this.paginatorComponent?.goToPage(page);
   }
 
-  delete(record: any) {
+  delete(evt: any, record: any) {
+    evt.stopPropagation();
     const observableConfirm: Observable<string> = this.utils.confirm(
       `¿Quiere eliminar este médico?`
     );

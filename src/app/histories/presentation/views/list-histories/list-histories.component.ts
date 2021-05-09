@@ -15,6 +15,7 @@ import { MetaDataColumn } from 'src/app/shared/services/meta-data-column';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 import { environment } from 'src/environments/environment';
 import { FormHistoryComponent } from '../form-history/form-history.component';
+import { DtoHistoryExport } from 'src/app/histories/application/history-export.dto';
 @Component({
   selector: 'amb-list-histories',
   templateUrl: './list-histories.component.html',
@@ -112,7 +113,10 @@ export class ListHistoriesComponent extends PaginatorData implements OnInit {
   }
 
   openOptionsExport() {
-    this.utils.openSheet();
+    this.historyUseCase.listAll().subscribe((response: History[]) => {
+      const dto = new DtoHistoryExport();
+      this.utils.openSheet(response, dto, 'Listado de atenciones', 'pacientes');
+    });
   }
 
   actionButton(action: string) {

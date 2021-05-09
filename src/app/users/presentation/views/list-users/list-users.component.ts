@@ -11,6 +11,7 @@ import { Roles } from 'src/app/shared/enums/roles.enum';
 import { KeyPadButton } from 'src/app/shared/interfaces/keybutton.interface';
 import { MetaDataColumn } from 'src/app/shared/services/meta-data-column';
 import { UtilsService } from 'src/app/shared/services/utils.service';
+import { DtoUserExport } from 'src/app/users/application/user-export.dto';
 import { UserUseCase } from 'src/app/users/application/user.usecase';
 import { User } from 'src/app/users/domain/user.interface';
 import { environment } from 'src/environments/environment';
@@ -112,7 +113,10 @@ export class ListUsersComponent extends PaginatorData implements OnInit {
   }
 
   openOptionsExport() {
-    this.utils.openSheet();
+    this.userUseCase.listAll().subscribe((response: User[]) => {
+      const dto = new DtoUserExport();
+      this.utils.openSheet(response, dto, 'Listado de usuarios', 'usuarios');
+    });
   }
 
   actionButton(action: string) {

@@ -24,14 +24,8 @@ export class AppComponent {
 
   ngOnInit() {
     this.configService.configuration.subscribe((config: ConfigLayout) => {
-      console.log(config);
       this.config = config;
     });
-
-    const data = this.activateRoute.snapshot.data;
-    console.log('data', data);
-
-    this.activateRoute.data.subscribe((response) => console.log(response));
   }
 
   showExpand(expanded: boolean) {
