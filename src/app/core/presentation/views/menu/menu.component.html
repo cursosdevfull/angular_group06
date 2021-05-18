@@ -1,0 +1,29 @@
+<mat-nav-list fxLayout="column" fxLayoutAlign="space-between">
+  <div>
+    <mat-list-item
+      *ngFor="let menu of listMenu"
+      routerLinkActive="activeLink"
+      class="menu"
+    >
+      <a [routerLink]="menu.url">
+        <button mat-icon-button color="primary">
+          <mat-icon
+            [svgIcon]="menu.icon"
+            matTooltip="{{ menu.title.toUpperCase() }}"
+          ></mat-icon>
+        </button>
+        <span *ngIf="expanded">
+          {{ menu.title }}
+        </span>
+      </a>
+    </mat-list-item>
+  </div>
+  <div>
+    <mat-list-item>
+      <button mat-icon-button color="accent" (click)="sentExpand()">
+        <mat-icon *ngIf="expanded">arrow_back_ios</mat-icon>
+        <mat-icon *ngIf="!expanded">arrow_forward_ios</mat-icon>
+      </button>
+    </mat-list-item>
+  </div>
+</mat-nav-list>
